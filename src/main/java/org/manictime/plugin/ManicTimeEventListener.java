@@ -31,7 +31,7 @@ public class ManicTimeEventListener implements FileEditorManagerListener, Status
     public void selectionChanged(FileEditorManagerEvent event) {
        var filePath = event.getNewFile().getPath();
        var file = event.getNewFile().getName();
-       serverManager.send("java", "ManicTime/Files", filePath, file);
+       serverManager.send("idea64", "ManicTime/Files", filePath, file);
 
         if(myStatusBar != null)
             myStatusBar.updateWidget("ManicTimeStatusBar");
