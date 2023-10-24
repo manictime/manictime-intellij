@@ -1,0 +1,20 @@
+<idea-plugin>
+    <id>org.manictime.plugin</id>
+    <name>ManicTime</name>
+    <vendor>ManicTime</vendor>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <resource-bundle>messages.MyBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <statusBarWidgetFactory
+                implementation="org.manictime.plugin.ManicTimeWidgetFactory"
+                id="ManicTimeStatusBar"/>
+    </extensions>
+
+    <projectListeners>
+        <listener class="org.manictime.plugin.ManicTimeEventListener"
+                  topic="com.intellij.openapi.fileEditor.FileEditorManagerListener" />
+    </projectListeners>
+</idea-plugin>
