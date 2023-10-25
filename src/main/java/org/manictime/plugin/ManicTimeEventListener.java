@@ -29,10 +29,12 @@ public class ManicTimeEventListener implements FileEditorManagerListener, Status
 
     @Override
     public void selectionChanged(FileEditorManagerEvent event) {
-       var filePath = event.getNewFile().getPath();
-       var file = event.getNewFile().getName();
-       serverManager.send("idea64", "ManicTime/Files", filePath, file);
-
+        var file = event.getNewFile();
+        if(file != null) {
+            var filePath = file.getPath();
+            var fileName = file.getName();
+            serverManager.send("idea64", "ManicTime/Files", filePath, fileName);
+        }
         if(myStatusBar != null)
             myStatusBar.updateWidget("ManicTimeStatusBar");
     }

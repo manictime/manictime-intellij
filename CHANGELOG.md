@@ -1,5 +1,9 @@
 # ManicTime Plugin Changelog
 
+## [1.1.0] - 2023-10-25
+
+Bugfix: error when deleting file
+
 
 ## [1.0.0] - 2023-10-24
 
