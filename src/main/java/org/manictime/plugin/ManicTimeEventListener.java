@@ -1,5 +1,6 @@
 package org.manictime.plugin;
 
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerEvent;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
@@ -13,6 +14,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.event.MouseEvent;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ManicTimeEventListener implements FileEditorManagerListener, StatusBarWidget, StatusBarWidget.TextPresentation {
     private StatusBar myStatusBar;
@@ -25,6 +28,15 @@ public class ManicTimeEventListener implements FileEditorManagerListener, Status
                 FileEditorManagerListener.FILE_EDITOR_MANAGER,
                 this
         );
+        Timer timer = new Timer();
+        long delay = 0; // Start immediately
+        long period = 30000; // Repeat every 30,000 milliseconds (30 seconds)
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                GetFileFromProject(project);
+            }
+        }, delay, period);
     }
 
     @Override
@@ -34,6 +46,20 @@ public class ManicTimeEventListener implements FileEditorManagerListener, Status
             var filePath = file.getPath();
             var fileName = file.getName();
             serverManager.send("idea64", "ManicTime/Files", filePath, fileName);
+        }
+        if(myStatusBar != null)
+            myStatusBar.updateWidget("ManicTimeStatusBar");
+    }
+
+    public void GetFileFromProject(Project project) {
+        var selectedFileEditor = FileEditorManager.getInstance(project).getSelectedEditor();
+        if(selectedFileEditor != null) {
+            var file = selectedFileEditor.getFile();
+            if (file != null) {
+                var filePath = file.getPath();
+                var fileName = file.getName();
+                serverManager.send("idea64", "ManicTime/Files", filePath, fileName);
+            }
         }
         if(myStatusBar != null)
             myStatusBar.updateWidget("ManicTimeStatusBar");
