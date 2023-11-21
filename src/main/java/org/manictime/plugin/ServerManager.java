@@ -61,8 +61,8 @@ public class ServerManager {
         }
     }
 
-    public void send(Object processName, Object documentType, Object document, Object documentGroup) {
-        String message = createMessage(processName, documentType, document, documentGroup);
+    public void send(Object processName, Object processId, Object documentType, Object document, Object documentGroup) {
+        String message = createMessage(processName, processId, documentType, document, documentGroup);
         lastMessage = message;
 
         System.out.println(servers);
@@ -90,10 +90,9 @@ public class ServerManager {
     }
 
 
-    private String createMessage(Object processName, Object documentType, Object document, Object documentGroup) {
-        String message = "{\"ProcessName\":\"" + processName + "\",\"DocumentType\":\"" + documentType +
+    private String createMessage(Object processName, Object processId,  Object documentType, Object document, Object documentGroup) {
+        return "{\"ProcessName\":\"" + processName + "\",\"ProcessId\":\"" + processId + "\",\"DocumentType\":\"" + documentType +
                 "\",\"Document\":\"" + document + "\",\"DocumentGroup\":\"" + documentGroup + "\"}";
-        return message;
     }
 
     private void removePort(String port) {
