@@ -1,5 +1,9 @@
 # ManicTime Plugin Changelog
 
+## [1.2.0] - 2023-11-16
+
+Changed icon and changes to internal logic
+
 ## [1.1.1] - 2023-10-26
 
 Sends current file path every 30 seconds
