@@ -1,5 +1,13 @@
 # ManicTime Plugin Changelog
 
+## [1.2.1] - 2024-04-12
+
+Changed Compatibility Range and icon
+
+## [1.2.0] - 2023-11-16
+
+Changed icon and changes to internal logic
+
 ## [1.2.0] - 2023-11-16
 
 Changed icon and changes to internal logic
